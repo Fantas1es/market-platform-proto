@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package market;
+
+option go_package = "Fantas1es/market-platform-proto/gen/go/market";
+
+service MarketService {
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse);
+  rpc GetPrices(GetPricesRequest) returns (GetPricesResponse);
+}
+
+message GetPriceRequest {
+  string symbol = 1;
+}
+
+message GetPriceResponse {
+    string symbol = 1;
+    double price = 2;
+    int64 timestamp = 3;
+}
+
+message GetPricesRequest {
+    repeated string symbol = 1;
+}
+
+message GetPricesResponse {
+  repeated Price price = 1;
+
+}
+
+message Price {
+  string symbol = 1;
+  double price = 2;
+  int64 timestamp = 3;
+}

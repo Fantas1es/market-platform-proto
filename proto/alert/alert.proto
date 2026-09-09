@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package alert;
+
+option go_package = "github.com/USERNAME/market-platform-proto/gen/go/alert";
+
+service AlertService {
+  rpc CreateAlert(CreateAlertRequest) returns (CreateAlertResponse);
+  rpc GetAlerts(GetAlertsRequest) returns (GetAlertsResponse);
+  rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertResponse);
+}
+
+message CreateAlertRequest {
+    string user_id = 1;
+    string symbol = 2;
+    Condition condition = 3;
+    double target_price = 4;
+}
+
+enum Condition {
+  CONDITION_UNSPECIFIED = 0;
+  PRICE_ABOVE = 1;
+  PRICE_BELOW = 2;
+}
+
+message CreateAlertResponse {
+    Alert alert = 1;
+}
+
+message Alert {
+  string id = 1;
+  string user_id = 2;
+  string symbol = 3;
+  Condition condition = 4;
+  double target_price = 5;
+  bool active = 6;
+  int64 created_at = 7;
+}
+
+message GetAlertsRequest {
+  string user_id = 1;
+}
+
+message GetAlertsResponse {
+  repeated Alert alerts = 1;
+}
+
+message DeleteAlertRequest {
+  string id = 1;
+}
+
+message DeleteAlertResponse {}
