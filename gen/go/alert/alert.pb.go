@@ -70,6 +70,58 @@ func (Condition) EnumDescriptor() ([]byte, []int) {
 	return file_alert_alert_proto_rawDescGZIP(), []int{0}
 }
 
+type AlertStatus int32
+
+const (
+	AlertStatus_ALERT_STATUS_UNSPECIFIED AlertStatus = 0
+	AlertStatus_ALERT_STATUS_ACTIVE      AlertStatus = 1
+	AlertStatus_ALERT_STATUS_TRIGGERED   AlertStatus = 2
+	AlertStatus_ALERT_STATUS_CANCELLED   AlertStatus = 3
+)
+
+// Enum value maps for AlertStatus.
+var (
+	AlertStatus_name = map[int32]string{
+		0: "ALERT_STATUS_UNSPECIFIED",
+		1: "ALERT_STATUS_ACTIVE",
+		2: "ALERT_STATUS_TRIGGERED",
+		3: "ALERT_STATUS_CANCELLED",
+	}
+	AlertStatus_value = map[string]int32{
+		"ALERT_STATUS_UNSPECIFIED": 0,
+		"ALERT_STATUS_ACTIVE":      1,
+		"ALERT_STATUS_TRIGGERED":   2,
+		"ALERT_STATUS_CANCELLED":   3,
+	}
+)
+
+func (x AlertStatus) Enum() *AlertStatus {
+	p := new(AlertStatus)
+	*p = x
+	return p
+}
+
+func (x AlertStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AlertStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_alert_alert_proto_enumTypes[1].Descriptor()
+}
+
+func (AlertStatus) Type() protoreflect.EnumType {
+	return &file_alert_alert_proto_enumTypes[1]
+}
+
+func (x AlertStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AlertStatus.Descriptor instead.
+func (AlertStatus) EnumDescriptor() ([]byte, []int) {
+	return file_alert_alert_proto_rawDescGZIP(), []int{1}
+}
+
 type Alert struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -78,7 +130,7 @@ type Alert struct {
 	Symbol        string                 `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	Condition     Condition              `protobuf:"varint,5,opt,name=condition,proto3,enum=alert.Condition" json:"condition,omitempty"`
 	TargetPrice   float64                `protobuf:"fixed64,6,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`
-	Active        bool                   `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"`
+	Status        AlertStatus            `protobuf:"varint,7,opt,name=status,proto3,enum=alert.AlertStatus" json:"status,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     int64                  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	TriggeredAt   *int64                 `protobuf:"varint,10,opt,name=triggered_at,json=triggeredAt,proto3,oneof" json:"triggered_at,omitempty"`
@@ -158,11 +210,11 @@ func (x *Alert) GetTargetPrice() float64 {
 	return 0
 }
 
-func (x *Alert) GetActive() bool {
+func (x *Alert) GetStatus() AlertStatus {
 	if x != nil {
-		return x.Active
+		return x.Status
 	}
-	return false
+	return AlertStatus_ALERT_STATUS_UNSPECIFIED
 }
 
 func (x *Alert) GetCreatedAt() int64 {
@@ -390,8 +442,10 @@ type UpdateAlertRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Version       int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
-	TargetPrice   *float64               `protobuf:"fixed64,3,opt,name=target_price,json=targetPrice,proto3,oneof" json:"target_price,omitempty"`
-	Condition     *Condition             `protobuf:"varint,4,opt,name=condition,proto3,enum=alert.Condition,oneof" json:"condition,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TargetPrice   *float64               `protobuf:"fixed64,4,opt,name=target_price,json=targetPrice,proto3,oneof" json:"target_price,omitempty"`
+	Condition     *Condition             `protobuf:"varint,5,opt,name=condition,proto3,enum=alert.Condition,oneof" json:"condition,omitempty"`
+	Status        *AlertStatus           `protobuf:"varint,6,opt,name=status,proto3,enum=alert.AlertStatus,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -440,6 +494,13 @@ func (x *UpdateAlertRequest) GetVersion() int64 {
 	return 0
 }
 
+func (x *UpdateAlertRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 func (x *UpdateAlertRequest) GetTargetPrice() float64 {
 	if x != nil && x.TargetPrice != nil {
 		return *x.TargetPrice
@@ -452,6 +513,13 @@ func (x *UpdateAlertRequest) GetCondition() Condition {
 		return *x.Condition
 	}
 	return Condition_CONDITION_UNSPECIFIED
+}
+
+func (x *UpdateAlertRequest) GetStatus() AlertStatus {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return AlertStatus_ALERT_STATUS_UNSPECIFIED
 }
 
 type UpdateAlertResponse struct {
@@ -501,6 +569,7 @@ func (x *UpdateAlertResponse) GetAlert() *Alert {
 type DeleteAlertRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -538,6 +607,13 @@ func (*DeleteAlertRequest) Descriptor() ([]byte, []int) {
 func (x *DeleteAlertRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
+	}
+	return 0
+}
+
+func (x *DeleteAlertRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
 	}
 	return 0
 }
@@ -582,15 +658,15 @@ var File_alert_alert_proto protoreflect.FileDescriptor
 
 const file_alert_alert_proto_rawDesc = "" +
 	"\n" +
-	"\x11alert/alert.proto\x12\x05alert\"\xc4\x02\n" +
+	"\x11alert/alert.proto\x12\x05alert\"\xd8\x02\n" +
 	"\x05Alert\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06symbol\x18\x04 \x01(\tR\x06symbol\x12.\n" +
 	"\tcondition\x18\x05 \x01(\x0e2\x10.alert.ConditionR\tcondition\x12!\n" +
-	"\ftarget_price\x18\x06 \x01(\x01R\vtargetPrice\x12\x16\n" +
-	"\x06active\x18\a \x01(\bR\x06active\x12\x1d\n" +
+	"\ftarget_price\x18\x06 \x01(\x01R\vtargetPrice\x12*\n" +
+	"\x06status\x18\a \x01(\x0e2\x12.alert.AlertStatusR\x06status\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
@@ -608,27 +684,37 @@ const file_alert_alert_proto_rawDesc = "" +
 	"\x10GetAlertsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"9\n" +
 	"\x11GetAlertsResponse\x12$\n" +
-	"\x06alerts\x18\x01 \x03(\v2\f.alert.AlertR\x06alerts\"\xba\x01\n" +
+	"\x06alerts\x18\x01 \x03(\v2\f.alert.AlertR\x06alerts\"\x8f\x02\n" +
 	"\x12UpdateAlertRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\x03R\aversion\x12&\n" +
-	"\ftarget_price\x18\x03 \x01(\x01H\x00R\vtargetPrice\x88\x01\x01\x123\n" +
-	"\tcondition\x18\x04 \x01(\x0e2\x10.alert.ConditionH\x01R\tcondition\x88\x01\x01B\x0f\n" +
+	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12&\n" +
+	"\ftarget_price\x18\x04 \x01(\x01H\x00R\vtargetPrice\x88\x01\x01\x123\n" +
+	"\tcondition\x18\x05 \x01(\x0e2\x10.alert.ConditionH\x01R\tcondition\x88\x01\x01\x12/\n" +
+	"\x06status\x18\x06 \x01(\x0e2\x12.alert.AlertStatusH\x02R\x06status\x88\x01\x01B\x0f\n" +
 	"\r_target_priceB\f\n" +
 	"\n" +
-	"_condition\"9\n" +
+	"_conditionB\t\n" +
+	"\a_status\"9\n" +
 	"\x13UpdateAlertResponse\x12\"\n" +
-	"\x05alert\x18\x01 \x01(\v2\f.alert.AlertR\x05alert\"$\n" +
+	"\x05alert\x18\x01 \x01(\v2\f.alert.AlertR\x05alert\"=\n" +
 	"\x12DeleteAlertRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x15\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"\x15\n" +
 	"\x13DeleteAlertResponse*H\n" +
 	"\tCondition\x12\x19\n" +
 	"\x15CONDITION_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vPRICE_ABOVE\x10\x01\x12\x0f\n" +
-	"\vPRICE_BELOW\x10\x022\xda\x01\n" +
+	"\vPRICE_BELOW\x10\x02*|\n" +
+	"\vAlertStatus\x12\x1c\n" +
+	"\x18ALERT_STATUS_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13ALERT_STATUS_ACTIVE\x10\x01\x12\x1a\n" +
+	"\x16ALERT_STATUS_TRIGGERED\x10\x02\x12\x1a\n" +
+	"\x16ALERT_STATUS_CANCELLED\x10\x032\xa0\x02\n" +
 	"\fAlertService\x12D\n" +
 	"\vCreateAlert\x12\x19.alert.CreateAlertRequest\x1a\x1a.alert.CreateAlertResponse\x12>\n" +
 	"\tGetAlerts\x12\x17.alert.GetAlertsRequest\x1a\x18.alert.GetAlertsResponse\x12D\n" +
+	"\vUpdateAlert\x12\x19.alert.UpdateAlertRequest\x1a\x1a.alert.UpdateAlertResponse\x12D\n" +
 	"\vDeleteAlert\x12\x19.alert.DeleteAlertRequest\x1a\x1a.alert.DeleteAlertResponseB8Z6github.com/USERNAME/market-platform-proto/gen/go/alertb\x06proto3"
 
 var (
@@ -643,38 +729,43 @@ func file_alert_alert_proto_rawDescGZIP() []byte {
 	return file_alert_alert_proto_rawDescData
 }
 
-var file_alert_alert_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_alert_alert_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_alert_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_alert_alert_proto_goTypes = []any{
 	(Condition)(0),              // 0: alert.Condition
-	(*Alert)(nil),               // 1: alert.Alert
-	(*CreateAlertRequest)(nil),  // 2: alert.CreateAlertRequest
-	(*CreateAlertResponse)(nil), // 3: alert.CreateAlertResponse
-	(*GetAlertsRequest)(nil),    // 4: alert.GetAlertsRequest
-	(*GetAlertsResponse)(nil),   // 5: alert.GetAlertsResponse
-	(*UpdateAlertRequest)(nil),  // 6: alert.UpdateAlertRequest
-	(*UpdateAlertResponse)(nil), // 7: alert.UpdateAlertResponse
-	(*DeleteAlertRequest)(nil),  // 8: alert.DeleteAlertRequest
-	(*DeleteAlertResponse)(nil), // 9: alert.DeleteAlertResponse
+	(AlertStatus)(0),            // 1: alert.AlertStatus
+	(*Alert)(nil),               // 2: alert.Alert
+	(*CreateAlertRequest)(nil),  // 3: alert.CreateAlertRequest
+	(*CreateAlertResponse)(nil), // 4: alert.CreateAlertResponse
+	(*GetAlertsRequest)(nil),    // 5: alert.GetAlertsRequest
+	(*GetAlertsResponse)(nil),   // 6: alert.GetAlertsResponse
+	(*UpdateAlertRequest)(nil),  // 7: alert.UpdateAlertRequest
+	(*UpdateAlertResponse)(nil), // 8: alert.UpdateAlertResponse
+	(*DeleteAlertRequest)(nil),  // 9: alert.DeleteAlertRequest
+	(*DeleteAlertResponse)(nil), // 10: alert.DeleteAlertResponse
 }
 var file_alert_alert_proto_depIdxs = []int32{
-	0, // 0: alert.Alert.condition:type_name -> alert.Condition
-	0, // 1: alert.CreateAlertRequest.condition:type_name -> alert.Condition
-	1, // 2: alert.CreateAlertResponse.alert:type_name -> alert.Alert
-	1, // 3: alert.GetAlertsResponse.alerts:type_name -> alert.Alert
-	0, // 4: alert.UpdateAlertRequest.condition:type_name -> alert.Condition
-	1, // 5: alert.UpdateAlertResponse.alert:type_name -> alert.Alert
-	2, // 6: alert.AlertService.CreateAlert:input_type -> alert.CreateAlertRequest
-	4, // 7: alert.AlertService.GetAlerts:input_type -> alert.GetAlertsRequest
-	8, // 8: alert.AlertService.DeleteAlert:input_type -> alert.DeleteAlertRequest
-	3, // 9: alert.AlertService.CreateAlert:output_type -> alert.CreateAlertResponse
-	5, // 10: alert.AlertService.GetAlerts:output_type -> alert.GetAlertsResponse
-	9, // 11: alert.AlertService.DeleteAlert:output_type -> alert.DeleteAlertResponse
-	9, // [9:12] is the sub-list for method output_type
-	6, // [6:9] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	0,  // 0: alert.Alert.condition:type_name -> alert.Condition
+	1,  // 1: alert.Alert.status:type_name -> alert.AlertStatus
+	0,  // 2: alert.CreateAlertRequest.condition:type_name -> alert.Condition
+	2,  // 3: alert.CreateAlertResponse.alert:type_name -> alert.Alert
+	2,  // 4: alert.GetAlertsResponse.alerts:type_name -> alert.Alert
+	0,  // 5: alert.UpdateAlertRequest.condition:type_name -> alert.Condition
+	1,  // 6: alert.UpdateAlertRequest.status:type_name -> alert.AlertStatus
+	2,  // 7: alert.UpdateAlertResponse.alert:type_name -> alert.Alert
+	3,  // 8: alert.AlertService.CreateAlert:input_type -> alert.CreateAlertRequest
+	5,  // 9: alert.AlertService.GetAlerts:input_type -> alert.GetAlertsRequest
+	7,  // 10: alert.AlertService.UpdateAlert:input_type -> alert.UpdateAlertRequest
+	9,  // 11: alert.AlertService.DeleteAlert:input_type -> alert.DeleteAlertRequest
+	4,  // 12: alert.AlertService.CreateAlert:output_type -> alert.CreateAlertResponse
+	6,  // 13: alert.AlertService.GetAlerts:output_type -> alert.GetAlertsResponse
+	8,  // 14: alert.AlertService.UpdateAlert:output_type -> alert.UpdateAlertResponse
+	10, // 15: alert.AlertService.DeleteAlert:output_type -> alert.DeleteAlertResponse
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_alert_alert_proto_init() }
@@ -689,7 +780,7 @@ func file_alert_alert_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_alert_alert_proto_rawDesc), len(file_alert_alert_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,

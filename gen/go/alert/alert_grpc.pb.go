@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AlertService_CreateAlert_FullMethodName = "/alert.AlertService/CreateAlert"
 	AlertService_GetAlerts_FullMethodName   = "/alert.AlertService/GetAlerts"
+	AlertService_UpdateAlert_FullMethodName = "/alert.AlertService/UpdateAlert"
 	AlertService_DeleteAlert_FullMethodName = "/alert.AlertService/DeleteAlert"
 )
 
@@ -30,6 +31,7 @@ const (
 type AlertServiceClient interface {
 	CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error)
 	GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (*GetAlertsResponse, error)
+	UpdateAlert(ctx context.Context, in *UpdateAlertRequest, opts ...grpc.CallOption) (*UpdateAlertResponse, error)
 	DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error)
 }
 
@@ -61,6 +63,16 @@ func (c *alertServiceClient) GetAlerts(ctx context.Context, in *GetAlertsRequest
 	return out, nil
 }
 
+func (c *alertServiceClient) UpdateAlert(ctx context.Context, in *UpdateAlertRequest, opts ...grpc.CallOption) (*UpdateAlertResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAlertResponse)
+	err := c.cc.Invoke(ctx, AlertService_UpdateAlert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *alertServiceClient) DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAlertResponse)
@@ -77,6 +89,7 @@ func (c *alertServiceClient) DeleteAlert(ctx context.Context, in *DeleteAlertReq
 type AlertServiceServer interface {
 	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
 	GetAlerts(context.Context, *GetAlertsRequest) (*GetAlertsResponse, error)
+	UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error)
 	DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error)
 	mustEmbedUnimplementedAlertServiceServer()
 }
@@ -93,6 +106,9 @@ func (UnimplementedAlertServiceServer) CreateAlert(context.Context, *CreateAlert
 }
 func (UnimplementedAlertServiceServer) GetAlerts(context.Context, *GetAlertsRequest) (*GetAlertsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAlerts not implemented")
+}
+func (UnimplementedAlertServiceServer) UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAlert not implemented")
 }
 func (UnimplementedAlertServiceServer) DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteAlert not implemented")
@@ -154,6 +170,24 @@ func _AlertService_GetAlerts_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AlertService_UpdateAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlertServiceServer).UpdateAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlertService_UpdateAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlertServiceServer).UpdateAlert(ctx, req.(*UpdateAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AlertService_DeleteAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAlertRequest)
 	if err := dec(in); err != nil {
@@ -186,6 +220,10 @@ var AlertService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAlerts",
 			Handler:    _AlertService_GetAlerts_Handler,
+		},
+		{
+			MethodName: "UpdateAlert",
+			Handler:    _AlertService_UpdateAlert_Handler,
 		},
 		{
 			MethodName: "DeleteAlert",

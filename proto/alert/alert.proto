@@ -17,6 +17,13 @@ enum Condition {
   PRICE_BELOW = 2;
 }
 
+enum AlertStatus {
+  ALERT_STATUS_UNSPECIFIED = 0;
+  ALERT_STATUS_ACTIVE = 1;
+  ALERT_STATUS_TRIGGERED = 2;
+  ALERT_STATUS_CANCELLED = 3;
+}
+
 message Alert {
   int64 id = 1;
   int64 version = 2;
@@ -24,7 +31,7 @@ message Alert {
   string symbol = 4;
   Condition condition = 5;
   double target_price = 6;
-  bool active = 7;
+  AlertStatus status = 7;
   int64 created_at = 8;
   int64 updated_at = 9;
   optional int64 triggered_at = 10;
@@ -49,13 +56,14 @@ message GetAlertsResponse {
   repeated Alert alerts = 1;
 }
 
-
 message UpdateAlertRequest {
   int64 id = 1;
   int64 version = 2;
+  int64 user_id = 3;
 
-  optional double target_price = 3;
-  optional Condition condition = 4;
+  optional double target_price = 4;
+  optional Condition condition = 5;
+  optional AlertStatus status = 6;
 }
 
 message UpdateAlertResponse {
@@ -64,6 +72,7 @@ message UpdateAlertResponse {
 
 message DeleteAlertRequest {
   int64 id = 1;
+  int64 user_id = 2;
 }
 
 message DeleteAlertResponse {}
