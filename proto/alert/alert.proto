@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package alert;
 
-option go_package = "github.com/USERNAME/market-platform-proto/gen/go/alert";
+option go_package = "github.com/Fantas1es/market-platform-proto/gen/go/alert";
 
 service AlertService {
   rpc CreateAlert(CreateAlertRequest) returns (CreateAlertResponse);
