@@ -7,6 +7,7 @@ option go_package = "github.com/USERNAME/market-platform-proto/gen/go/alert";
 service AlertService {
   rpc CreateAlert(CreateAlertRequest) returns (CreateAlertResponse);
   rpc GetAlerts(GetAlertsRequest) returns (GetAlertsResponse);
+  rpc UpdateAlert(UpdateAlertRequest) returns (UpdateAlertResponse);
   rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertResponse);
 }
 
