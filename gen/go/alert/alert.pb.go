@@ -715,7 +715,7 @@ const file_alert_alert_proto_rawDesc = "" +
 	"\vCreateAlert\x12\x19.alert.CreateAlertRequest\x1a\x1a.alert.CreateAlertResponse\x12>\n" +
 	"\tGetAlerts\x12\x17.alert.GetAlertsRequest\x1a\x18.alert.GetAlertsResponse\x12D\n" +
 	"\vUpdateAlert\x12\x19.alert.UpdateAlertRequest\x1a\x1a.alert.UpdateAlertResponse\x12D\n" +
-	"\vDeleteAlert\x12\x19.alert.DeleteAlertRequest\x1a\x1a.alert.DeleteAlertResponseB8Z6github.com/USERNAME/market-platform-proto/gen/go/alertb\x06proto3"
+	"\vDeleteAlert\x12\x19.alert.DeleteAlertRequest\x1a\x1a.alert.DeleteAlertResponseB9Z7github.com/Fantas1es/market-platform-proto/gen/go/alertb\x06proto3"
 
 var (
 	file_alert_alert_proto_rawDescOnce sync.Once
