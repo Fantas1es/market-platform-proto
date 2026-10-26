@@ -10,43 +10,59 @@ service AlertService {
   rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertResponse);
 }
 
-message CreateAlertRequest {
-    string user_id = 1;
-    string symbol = 2;
-    Condition condition = 3;
-    double target_price = 4;
-}
-
 enum Condition {
   CONDITION_UNSPECIFIED = 0;
   PRICE_ABOVE = 1;
   PRICE_BELOW = 2;
 }
 
-message CreateAlertResponse {
-    Alert alert = 1;
+message Alert {
+  int64 id = 1;
+  int64 version = 2;
+  int64 user_id = 3;
+  string symbol = 4;
+  Condition condition = 5;
+  double target_price = 6;
+  bool active = 7;
+  int64 created_at = 8;
+  int64 updated_at = 9;
+  optional int64 triggered_at = 10;
 }
 
-message Alert {
-  string id = 1;
-  string user_id = 2;
-  string symbol = 3;
-  Condition condition = 4;
-  double target_price = 5;
-  bool active = 6;
-  int64 created_at = 7;
+message CreateAlertRequest {
+  int64 user_id = 1;
+  string symbol = 2;
+  Condition condition = 3;
+  double target_price = 4;
+}
+
+message CreateAlertResponse {
+  Alert alert = 1;
 }
 
 message GetAlertsRequest {
-  string user_id = 1;
+  int64 user_id = 1;
 }
 
 message GetAlertsResponse {
   repeated Alert alerts = 1;
 }
 
+
+message UpdateAlertRequest {
+  int64 id = 1;
+  int64 version = 2;
+
+  optional double target_price = 3;
+  optional Condition condition = 4;
+}
+
+message UpdateAlertResponse {
+  Alert alert = 1;
+}
+
 message DeleteAlertRequest {
-  string id = 1;
+  int64 id = 1;
 }
 
 message DeleteAlertResponse {}

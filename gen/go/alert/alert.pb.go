@@ -70,134 +70,25 @@ func (Condition) EnumDescriptor() ([]byte, []int) {
 	return file_alert_alert_proto_rawDescGZIP(), []int{0}
 }
 
-type CreateAlertRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Symbol        string                 `protobuf:"bytes,2,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Condition     Condition              `protobuf:"varint,3,opt,name=condition,proto3,enum=alert.Condition" json:"condition,omitempty"`
-	TargetPrice   float64                `protobuf:"fixed64,4,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateAlertRequest) Reset() {
-	*x = CreateAlertRequest{}
-	mi := &file_alert_alert_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateAlertRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateAlertRequest) ProtoMessage() {}
-
-func (x *CreateAlertRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_alert_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateAlertRequest.ProtoReflect.Descriptor instead.
-func (*CreateAlertRequest) Descriptor() ([]byte, []int) {
-	return file_alert_alert_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *CreateAlertRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-func (x *CreateAlertRequest) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
-	}
-	return ""
-}
-
-func (x *CreateAlertRequest) GetCondition() Condition {
-	if x != nil {
-		return x.Condition
-	}
-	return Condition_CONDITION_UNSPECIFIED
-}
-
-func (x *CreateAlertRequest) GetTargetPrice() float64 {
-	if x != nil {
-		return x.TargetPrice
-	}
-	return 0
-}
-
-type CreateAlertResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Alert         *Alert                 `protobuf:"bytes,1,opt,name=alert,proto3" json:"alert,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateAlertResponse) Reset() {
-	*x = CreateAlertResponse{}
-	mi := &file_alert_alert_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateAlertResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateAlertResponse) ProtoMessage() {}
-
-func (x *CreateAlertResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_alert_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateAlertResponse.ProtoReflect.Descriptor instead.
-func (*CreateAlertResponse) Descriptor() ([]byte, []int) {
-	return file_alert_alert_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateAlertResponse) GetAlert() *Alert {
-	if x != nil {
-		return x.Alert
-	}
-	return nil
-}
-
 type Alert struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Symbol        string                 `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Condition     Condition              `protobuf:"varint,4,opt,name=condition,proto3,enum=alert.Condition" json:"condition,omitempty"`
-	TargetPrice   float64                `protobuf:"fixed64,5,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`
-	Active        bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Version       int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Symbol        string                 `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Condition     Condition              `protobuf:"varint,5,opt,name=condition,proto3,enum=alert.Condition" json:"condition,omitempty"`
+	TargetPrice   float64                `protobuf:"fixed64,6,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`
+	Active        bool                   `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	TriggeredAt   *int64                 `protobuf:"varint,10,opt,name=triggered_at,json=triggeredAt,proto3,oneof" json:"triggered_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Alert) Reset() {
 	*x = Alert{}
-	mi := &file_alert_alert_proto_msgTypes[2]
+	mi := &file_alert_alert_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -209,7 +100,7 @@ func (x *Alert) String() string {
 func (*Alert) ProtoMessage() {}
 
 func (x *Alert) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_alert_proto_msgTypes[2]
+	mi := &file_alert_alert_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -222,21 +113,28 @@ func (x *Alert) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Alert.ProtoReflect.Descriptor instead.
 func (*Alert) Descriptor() ([]byte, []int) {
-	return file_alert_alert_proto_rawDescGZIP(), []int{2}
+	return file_alert_alert_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Alert) GetId() string {
+func (x *Alert) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
-func (x *Alert) GetUserId() string {
+func (x *Alert) GetVersion() int64 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+func (x *Alert) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *Alert) GetSymbol() string {
@@ -274,9 +172,135 @@ func (x *Alert) GetCreatedAt() int64 {
 	return 0
 }
 
+func (x *Alert) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *Alert) GetTriggeredAt() int64 {
+	if x != nil && x.TriggeredAt != nil {
+		return *x.TriggeredAt
+	}
+	return 0
+}
+
+type CreateAlertRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Symbol        string                 `protobuf:"bytes,2,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Condition     Condition              `protobuf:"varint,3,opt,name=condition,proto3,enum=alert.Condition" json:"condition,omitempty"`
+	TargetPrice   float64                `protobuf:"fixed64,4,opt,name=target_price,json=targetPrice,proto3" json:"target_price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAlertRequest) Reset() {
+	*x = CreateAlertRequest{}
+	mi := &file_alert_alert_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAlertRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAlertRequest) ProtoMessage() {}
+
+func (x *CreateAlertRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_alert_alert_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAlertRequest.ProtoReflect.Descriptor instead.
+func (*CreateAlertRequest) Descriptor() ([]byte, []int) {
+	return file_alert_alert_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateAlertRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateAlertRequest) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *CreateAlertRequest) GetCondition() Condition {
+	if x != nil {
+		return x.Condition
+	}
+	return Condition_CONDITION_UNSPECIFIED
+}
+
+func (x *CreateAlertRequest) GetTargetPrice() float64 {
+	if x != nil {
+		return x.TargetPrice
+	}
+	return 0
+}
+
+type CreateAlertResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Alert         *Alert                 `protobuf:"bytes,1,opt,name=alert,proto3" json:"alert,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAlertResponse) Reset() {
+	*x = CreateAlertResponse{}
+	mi := &file_alert_alert_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAlertResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAlertResponse) ProtoMessage() {}
+
+func (x *CreateAlertResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_alert_alert_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAlertResponse.ProtoReflect.Descriptor instead.
+func (*CreateAlertResponse) Descriptor() ([]byte, []int) {
+	return file_alert_alert_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateAlertResponse) GetAlert() *Alert {
+	if x != nil {
+		return x.Alert
+	}
+	return nil
+}
+
 type GetAlertsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -311,11 +335,11 @@ func (*GetAlertsRequest) Descriptor() ([]byte, []int) {
 	return file_alert_alert_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetAlertsRequest) GetUserId() string {
+func (x *GetAlertsRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 type GetAlertsResponse struct {
@@ -362,16 +386,128 @@ func (x *GetAlertsResponse) GetAlerts() []*Alert {
 	return nil
 }
 
+type UpdateAlertRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Version       int64                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	TargetPrice   *float64               `protobuf:"fixed64,3,opt,name=target_price,json=targetPrice,proto3,oneof" json:"target_price,omitempty"`
+	Condition     *Condition             `protobuf:"varint,4,opt,name=condition,proto3,enum=alert.Condition,oneof" json:"condition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAlertRequest) Reset() {
+	*x = UpdateAlertRequest{}
+	mi := &file_alert_alert_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAlertRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAlertRequest) ProtoMessage() {}
+
+func (x *UpdateAlertRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_alert_alert_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAlertRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAlertRequest) Descriptor() ([]byte, []int) {
+	return file_alert_alert_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateAlertRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateAlertRequest) GetVersion() int64 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+func (x *UpdateAlertRequest) GetTargetPrice() float64 {
+	if x != nil && x.TargetPrice != nil {
+		return *x.TargetPrice
+	}
+	return 0
+}
+
+func (x *UpdateAlertRequest) GetCondition() Condition {
+	if x != nil && x.Condition != nil {
+		return *x.Condition
+	}
+	return Condition_CONDITION_UNSPECIFIED
+}
+
+type UpdateAlertResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Alert         *Alert                 `protobuf:"bytes,1,opt,name=alert,proto3" json:"alert,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAlertResponse) Reset() {
+	*x = UpdateAlertResponse{}
+	mi := &file_alert_alert_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAlertResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAlertResponse) ProtoMessage() {}
+
+func (x *UpdateAlertResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_alert_alert_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAlertResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAlertResponse) Descriptor() ([]byte, []int) {
+	return file_alert_alert_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateAlertResponse) GetAlert() *Alert {
+	if x != nil {
+		return x.Alert
+	}
+	return nil
+}
+
 type DeleteAlertRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteAlertRequest) Reset() {
 	*x = DeleteAlertRequest{}
-	mi := &file_alert_alert_proto_msgTypes[5]
+	mi := &file_alert_alert_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -383,7 +519,7 @@ func (x *DeleteAlertRequest) String() string {
 func (*DeleteAlertRequest) ProtoMessage() {}
 
 func (x *DeleteAlertRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_alert_proto_msgTypes[5]
+	mi := &file_alert_alert_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -396,14 +532,14 @@ func (x *DeleteAlertRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlertRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAlertRequest) Descriptor() ([]byte, []int) {
-	return file_alert_alert_proto_rawDescGZIP(), []int{5}
+	return file_alert_alert_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *DeleteAlertRequest) GetId() string {
+func (x *DeleteAlertRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 type DeleteAlertResponse struct {
@@ -414,7 +550,7 @@ type DeleteAlertResponse struct {
 
 func (x *DeleteAlertResponse) Reset() {
 	*x = DeleteAlertResponse{}
-	mi := &file_alert_alert_proto_msgTypes[6]
+	mi := &file_alert_alert_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -426,7 +562,7 @@ func (x *DeleteAlertResponse) String() string {
 func (*DeleteAlertResponse) ProtoMessage() {}
 
 func (x *DeleteAlertResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_alert_alert_proto_msgTypes[6]
+	mi := &file_alert_alert_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -439,36 +575,52 @@ func (x *DeleteAlertResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlertResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAlertResponse) Descriptor() ([]byte, []int) {
-	return file_alert_alert_proto_rawDescGZIP(), []int{6}
+	return file_alert_alert_proto_rawDescGZIP(), []int{8}
 }
 
 var File_alert_alert_proto protoreflect.FileDescriptor
 
 const file_alert_alert_proto_rawDesc = "" +
 	"\n" +
-	"\x11alert/alert.proto\x12\x05alert\"\x98\x01\n" +
+	"\x11alert/alert.proto\x12\x05alert\"\xc4\x02\n" +
+	"\x05Alert\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x03R\aversion\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
+	"\x06symbol\x18\x04 \x01(\tR\x06symbol\x12.\n" +
+	"\tcondition\x18\x05 \x01(\x0e2\x10.alert.ConditionR\tcondition\x12!\n" +
+	"\ftarget_price\x18\x06 \x01(\x01R\vtargetPrice\x12\x16\n" +
+	"\x06active\x18\a \x01(\bR\x06active\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\x03R\tupdatedAt\x12&\n" +
+	"\ftriggered_at\x18\n" +
+	" \x01(\x03H\x00R\vtriggeredAt\x88\x01\x01B\x0f\n" +
+	"\r_triggered_at\"\x98\x01\n" +
 	"\x12CreateAlertRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
 	"\x06symbol\x18\x02 \x01(\tR\x06symbol\x12.\n" +
 	"\tcondition\x18\x03 \x01(\x0e2\x10.alert.ConditionR\tcondition\x12!\n" +
 	"\ftarget_price\x18\x04 \x01(\x01R\vtargetPrice\"9\n" +
 	"\x13CreateAlertResponse\x12\"\n" +
-	"\x05alert\x18\x01 \x01(\v2\f.alert.AlertR\x05alert\"\xd2\x01\n" +
-	"\x05Alert\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06symbol\x18\x03 \x01(\tR\x06symbol\x12.\n" +
-	"\tcondition\x18\x04 \x01(\x0e2\x10.alert.ConditionR\tcondition\x12!\n" +
-	"\ftarget_price\x18\x05 \x01(\x01R\vtargetPrice\x12\x16\n" +
-	"\x06active\x18\x06 \x01(\bR\x06active\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\a \x01(\x03R\tcreatedAt\"+\n" +
+	"\x05alert\x18\x01 \x01(\v2\f.alert.AlertR\x05alert\"+\n" +
 	"\x10GetAlertsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"9\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"9\n" +
 	"\x11GetAlertsResponse\x12$\n" +
-	"\x06alerts\x18\x01 \x03(\v2\f.alert.AlertR\x06alerts\"$\n" +
+	"\x06alerts\x18\x01 \x03(\v2\f.alert.AlertR\x06alerts\"\xba\x01\n" +
+	"\x12UpdateAlertRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x03R\aversion\x12&\n" +
+	"\ftarget_price\x18\x03 \x01(\x01H\x00R\vtargetPrice\x88\x01\x01\x123\n" +
+	"\tcondition\x18\x04 \x01(\x0e2\x10.alert.ConditionH\x01R\tcondition\x88\x01\x01B\x0f\n" +
+	"\r_target_priceB\f\n" +
+	"\n" +
+	"_condition\"9\n" +
+	"\x13UpdateAlertResponse\x12\"\n" +
+	"\x05alert\x18\x01 \x01(\v2\f.alert.AlertR\x05alert\"$\n" +
 	"\x12DeleteAlertRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x15\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x15\n" +
 	"\x13DeleteAlertResponse*H\n" +
 	"\tCondition\x12\x19\n" +
 	"\x15CONDITION_UNSPECIFIED\x10\x00\x12\x0f\n" +
@@ -492,33 +644,37 @@ func file_alert_alert_proto_rawDescGZIP() []byte {
 }
 
 var file_alert_alert_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_alert_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_alert_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_alert_alert_proto_goTypes = []any{
 	(Condition)(0),              // 0: alert.Condition
-	(*CreateAlertRequest)(nil),  // 1: alert.CreateAlertRequest
-	(*CreateAlertResponse)(nil), // 2: alert.CreateAlertResponse
-	(*Alert)(nil),               // 3: alert.Alert
+	(*Alert)(nil),               // 1: alert.Alert
+	(*CreateAlertRequest)(nil),  // 2: alert.CreateAlertRequest
+	(*CreateAlertResponse)(nil), // 3: alert.CreateAlertResponse
 	(*GetAlertsRequest)(nil),    // 4: alert.GetAlertsRequest
 	(*GetAlertsResponse)(nil),   // 5: alert.GetAlertsResponse
-	(*DeleteAlertRequest)(nil),  // 6: alert.DeleteAlertRequest
-	(*DeleteAlertResponse)(nil), // 7: alert.DeleteAlertResponse
+	(*UpdateAlertRequest)(nil),  // 6: alert.UpdateAlertRequest
+	(*UpdateAlertResponse)(nil), // 7: alert.UpdateAlertResponse
+	(*DeleteAlertRequest)(nil),  // 8: alert.DeleteAlertRequest
+	(*DeleteAlertResponse)(nil), // 9: alert.DeleteAlertResponse
 }
 var file_alert_alert_proto_depIdxs = []int32{
-	0, // 0: alert.CreateAlertRequest.condition:type_name -> alert.Condition
-	3, // 1: alert.CreateAlertResponse.alert:type_name -> alert.Alert
-	0, // 2: alert.Alert.condition:type_name -> alert.Condition
-	3, // 3: alert.GetAlertsResponse.alerts:type_name -> alert.Alert
-	1, // 4: alert.AlertService.CreateAlert:input_type -> alert.CreateAlertRequest
-	4, // 5: alert.AlertService.GetAlerts:input_type -> alert.GetAlertsRequest
-	6, // 6: alert.AlertService.DeleteAlert:input_type -> alert.DeleteAlertRequest
-	2, // 7: alert.AlertService.CreateAlert:output_type -> alert.CreateAlertResponse
-	5, // 8: alert.AlertService.GetAlerts:output_type -> alert.GetAlertsResponse
-	7, // 9: alert.AlertService.DeleteAlert:output_type -> alert.DeleteAlertResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0, // 0: alert.Alert.condition:type_name -> alert.Condition
+	0, // 1: alert.CreateAlertRequest.condition:type_name -> alert.Condition
+	1, // 2: alert.CreateAlertResponse.alert:type_name -> alert.Alert
+	1, // 3: alert.GetAlertsResponse.alerts:type_name -> alert.Alert
+	0, // 4: alert.UpdateAlertRequest.condition:type_name -> alert.Condition
+	1, // 5: alert.UpdateAlertResponse.alert:type_name -> alert.Alert
+	2, // 6: alert.AlertService.CreateAlert:input_type -> alert.CreateAlertRequest
+	4, // 7: alert.AlertService.GetAlerts:input_type -> alert.GetAlertsRequest
+	8, // 8: alert.AlertService.DeleteAlert:input_type -> alert.DeleteAlertRequest
+	3, // 9: alert.AlertService.CreateAlert:output_type -> alert.CreateAlertResponse
+	5, // 10: alert.AlertService.GetAlerts:output_type -> alert.GetAlertsResponse
+	9, // 11: alert.AlertService.DeleteAlert:output_type -> alert.DeleteAlertResponse
+	9, // [9:12] is the sub-list for method output_type
+	6, // [6:9] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_alert_alert_proto_init() }
@@ -526,13 +682,15 @@ func file_alert_alert_proto_init() {
 	if File_alert_alert_proto != nil {
 		return
 	}
+	file_alert_alert_proto_msgTypes[0].OneofWrappers = []any{}
+	file_alert_alert_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_alert_alert_proto_rawDesc), len(file_alert_alert_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
